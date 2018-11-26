@@ -41,12 +41,10 @@ init:
 
 before_build:
   - mkdir c:\projects\Qwt\build
-  - pushd c:\projects\Qwt\build
+  - cd c:\projects\Qwt\build
   - cmake --version
   - cmake .. -DCMAKE_BUILD_TYPE=%configuration% -G %generator% -DCMAKE_PREFIX_PATH=%qt5path%
-  - popd
 
 build_script:
-  - pushd c:\projects\Qwt\build
+  - cd c:\projects\Qwt\build
   - cmake --build . -DCMAKE_BUILD_TYPE=%configuration%
-  - popd
