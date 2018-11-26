@@ -26,7 +26,7 @@ if(WIN32)
       string(REPLACE "/MD" "/MT" ${flag_var} "${${flag_var}}")
     else()
       string(REPLACE "/MT" "/MD" ${flag_var} "${${flag_var}}")
-    endif(NOT CRASHRPT_LINK_CRT_AS_DLL)
+    endif()
   endforeach()
 endif()
 
