@@ -1,0 +1,53 @@
+version: '{build}'
+
+branches:
+  except:
+    - gh-pages
+
+clone_folder: c:\projects\Qwt
+
+image:
+  - Visual Studio 2017
+  - Visual Studio 2015
+  - Visual Studio 2013
+
+configuration:
+  - Debug
+  - Release
+
+environment:
+  matrix:
+  - arch: Win32
+  - arch: Win64
+
+matrix:
+  exclude:
+    - arch: Win32
+      image: Visual Studio 2017
+
+init:
+- echo %APPVEYOR_BUILD_WORKER_IMAGE% - %arch%
+- if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2017" ( set vs=Visual Studio 15 2017)
+- if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2015" ( set vs=Visual Studio 14 2015)
+- if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2013" ( set vs=Visual Studio 12 2013)
+- if "%arch%"=="Win64" ( set generator="%vs% Win64" )
+- if "%arch%"=="Win32" ( set generator="%vs%" )
+- if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2017" ( set qt5="C:\Qt\5.9\msvc2017")
+- if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2015" ( set qt5="C:\Qt\5.9\msvc2015")
+- if "%APPVEYOR_BUILD_WORKER_IMAGE%"=="Visual Studio 2013" ( set qt5="C:\Qt\5.6\msvc2013")
+- if "%arch%"=="Win64" ( set qt5path="%qt5%_64" )
+- if "%arch%"=="Win32" ( set qt5path="%qt5%" )
+- echo %generator% - %qt5path%
+
+before_build:
+  - set Path=%qt5path%\bin;%Path%
+  - cmd: |-
+    mkdir build
+    cd build
+    cmake --version
+    cmake .. -G %generator% --config %configuration%
+
+build_script:
+  - cmd: |-
+    cd build
+    cmake --build . --config %configuration%
