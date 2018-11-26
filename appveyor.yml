@@ -40,13 +40,11 @@ init:
 - echo %generator% - %qt5path%
 
 before_build:
-- cmd: |-
-  mkdir build
-  cd build
-  cmake --version
-  cmake .. -G %generator% --config %configuration% -DCMAKE_PREFIX_PATH=%qt5path%
+  - mkdir build
+  - cd build
+  - cmake --version
+  - cmake .. -G %generator% --config %configuration% -DCMAKE_PREFIX_PATH=%qt5path%
 
 build_script:
-- cmd: |-
-  cd build
-  cmake --build . --config %configuration%
+  - cd build
+  - cmake --build . --config %configuration%
