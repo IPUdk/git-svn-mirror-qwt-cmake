@@ -1,15 +1,19 @@
 language: cpp
 
+env:
+  - QWT_BUILD_SHARED_LIBS=ON
+  - QWT_BUILD_SHARED_LIBS=OFF
+  - CONFIG=Debug
+  - CONFIG=Release
+
 matrix:
   include:
     - os: osx
       compiler: clang
-      env: CONFIG=Release
     - os: linux
       sudo: required
       dist: trusty
       compiler: gcc
-      env: CONFIG=Release
 
 install:
   - brew unlink cmake
@@ -35,5 +39,5 @@ install:
 
 script:
   - mkdir build && pushd build
-  - cmake .. -DCMAKE_BUILD_TYPE=$CONFIG -DCMAKE_PREFIX_PATH=$QTDIR
+  - cmake .. -DCMAKE_BUILD_TYPE=$CONFIG -DCMAKE_PREFIX_PATH=$QTDIR -DQWT_BUILD_SHARED_LIBS=$QWT_BUILD_SHARED_LIBS
   - cmake --build . --config $CONFIG

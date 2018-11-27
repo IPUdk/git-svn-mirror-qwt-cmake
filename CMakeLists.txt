@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 2.8)
 project(Qwt)
 
+#QWT_BUILD_SHARED_LIBS=ON
+#if(WIN32)
+#	add_definitions(-DQT_DLL -DQWT_DLL -DQWT_MAKEDLL)
+#endif()
+
 find_package(Qt5 COMPONENTS Core Widgets Concurrent OpenGL Svg PrintSupport REQUIRED)
 
 set(CMAKE_AUTOMOC ON) # For meta object compiler
@@ -15,7 +20,12 @@ file(GLOB QWT_NGNS_SRC textengines/*.cpp)
 file(GLOB QWT_NGNS_HDR textengines/*.h)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/textengines)
 
-add_library(qwt STATIC ${QWT_MAIN_SRC} ${QWT_NGNS_SRC})
+if(QWT_BUILD_SHARED_LIBS)
+  add_library(qwt SHARED ${QWT_MAIN_SRC} ${QWT_NGNS_SRC})
+else()
+  add_library(qwt STATIC ${QWT_MAIN_SRC} ${QWT_NGNS_SRC})
+endif()
+
 if(WIN32)
   set_target_properties(qwt PROPERTIES DEBUG_POSTFIX "d")
   set(LINK_CRT_AS_DLL ON)

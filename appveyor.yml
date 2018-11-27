@@ -12,13 +12,15 @@ image:
   - Visual Studio 2013
 
 configuration:
-  - Debug
-#  - Release
+#  - Debug
+  - Release
 
 environment:
   matrix:
   - arch: Win32
   - arch: Win64
+  - QWT_BUILD_SHARED_LIBS: ON
+  - QWT_BUILD_SHARED_LIBS: OFF
 
 matrix:
   exclude:
@@ -43,7 +45,7 @@ before_build:
   - mkdir c:\projects\Qwt\build
   - cd c:\projects\Qwt\build
   - cmake --version
-  - cmake .. -DCMAKE_BUILD_TYPE=%configuration% -G %generator% -DCMAKE_PREFIX_PATH=%qt5path%
+  - cmake .. -DCMAKE_BUILD_TYPE=%configuration% -G %generator% -DCMAKE_PREFIX_PATH=%qt5path% -DQWT_BUILD_SHARED_LIBS=%QWT_BUILD_SHARED_LIBS%
 
 build_script:
   - cd c:\projects\Qwt\build
