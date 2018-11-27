@@ -5,16 +5,35 @@ matrix:
     - os: osx
       compiler: clang
       env: CONFIG=Release
+    - os: linux
+      sudo: required
+      dist: trusty
+      compiler: gcc
+      env: CONFIG=Release
 
 install:
-  - brew update
   - brew unlink cmake
   - brew install cmake
   - brew install qt5
   - brew link --force qt5
   - chmod -R 755 /usr/local/opt/qt5/*
+  - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then
+         sudo apt-add-repository -y ppa:beineri/opt-qt597-trusty
+      && sudo apt-get -qq update
+      && sudo apt-get -qq install build-essential qt59tools qt59base cmake
+      && QTDIR="/opt/qt59"
+      ;
+    else
+         brew unlink cmake
+      && brew install cmake
+      && brew install qt5
+      && brew link --force qt5
+      && chmod -R 755 /usr/local/opt/qt5/*
+      && QTDIR="/usr/local/opt/qt5"
+      ;
+    fi
 
 script:
   - mkdir build && pushd build
-  - cmake .. -DCMAKE_BUILD_TYPE=$CONFIG -DCMAKE_PREFIX_PATH=/usr/local/opt/qt5/lib/cmake
+  - cmake .. -DCMAKE_BUILD_TYPE=$CONFIG -DCMAKE_PREFIX_PATH=$QTDIR
   - cmake --build . --config $CONFIG
