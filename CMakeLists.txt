@@ -21,156 +21,180 @@ set(CMAKE_AUTOMOC ON) # For meta object compiler
 #set(CMAKE_AUTOUIC ON) # UI files
 #set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-list(APPEND QWT_SOURCES 
- 	qwt/src/qwt_abstract_scale_draw.cpp
-  qwt/src/qwt_clipper.cpp
-  qwt/src/qwt_color_map.cpp
-  qwt/src/qwt_column_symbol.cpp
-  qwt/src/qwt_date.cpp
-  qwt/src/qwt_date_scale_draw.cpp
-  qwt/src/qwt_date_scale_engine.cpp
-  qwt/src/qwt_dyngrid_layout.cpp
-  qwt/src/qwt_event_pattern.cpp
-  qwt/src/qwt_graphic.cpp
-  qwt/src/qwt_interval.cpp
-  qwt/src/qwt_interval_symbol.cpp
-  qwt/src/qwt_math.cpp
-  qwt/src/qwt_magnifier.cpp
-  qwt/src/qwt_null_paintdevice.cpp
-  qwt/src/qwt_painter.cpp
-  qwt/src/qwt_painter_command.cpp
-  qwt/src/qwt_panner.cpp
-  qwt/src/qwt_picker.cpp
-  qwt/src/qwt_picker_machine.cpp
-  qwt/src/qwt_pixel_matrix.cpp
-  qwt/src/qwt_point_3d.cpp
-  qwt/src/qwt_point_polar.cpp
-  qwt/src/qwt_round_scale_draw.cpp
-  qwt/src/qwt_scale_div.cpp
-  qwt/src/qwt_scale_draw.cpp
-  qwt/src/qwt_scale_map.cpp
-  qwt/src/qwt_spline.cpp
-  qwt/src/qwt_scale_engine.cpp
-  qwt/src/qwt_symbol.cpp
-  qwt/src/qwt_system_clock.cpp
-  qwt/src/qwt_text_engine.cpp
-  qwt/src/qwt_text_label.cpp
-  qwt/src/qwt_text.cpp
-  qwt/src/qwt_transform.cpp
-  qwt/src/qwt_widget_overlay.cpp
-)
-include_directories(qwt/src)
+# list(APPEND QWT_SOURCES 
+ 	# qwt/src/qwt_abstract_scale_draw.cpp
+  # qwt/src/qwt_clipper.cpp
+  # qwt/src/qwt_color_map.cpp
+  # qwt/src/qwt_column_symbol.cpp
+  # qwt/src/qwt_date.cpp
+  # qwt/src/qwt_date_scale_draw.cpp
+  # qwt/src/qwt_date_scale_engine.cpp
+  # qwt/src/qwt_dyngrid_layout.cpp
+  # qwt/src/qwt_event_pattern.cpp
+  # qwt/src/qwt_graphic.cpp
+  # qwt/src/qwt_interval.cpp
+  # qwt/src/qwt_interval_symbol.cpp
+  # qwt/src/qwt_math.cpp
+  # qwt/src/qwt_magnifier.cpp
+  # qwt/src/qwt_null_paintdevice.cpp
+  # qwt/src/qwt_painter.cpp
+  # qwt/src/qwt_painter_command.cpp
+  # qwt/src/qwt_panner.cpp
+  # qwt/src/qwt_picker.cpp
+  # qwt/src/qwt_picker_machine.cpp
+  # qwt/src/qwt_pixel_matrix.cpp
+  # qwt/src/qwt_point_3d.cpp
+  # qwt/src/qwt_point_polar.cpp
+  # qwt/src/qwt_round_scale_draw.cpp
+  # qwt/src/qwt_scale_div.cpp
+  # qwt/src/qwt_scale_draw.cpp
+  # qwt/src/qwt_scale_map.cpp
+  # qwt/src/qwt_spline.cpp
+  # qwt/src/qwt_scale_engine.cpp
+  # qwt/src/qwt_symbol.cpp
+  # qwt/src/qwt_system_clock.cpp
+  # qwt/src/qwt_text_engine.cpp
+  # qwt/src/qwt_text_label.cpp
+  # qwt/src/qwt_text.cpp
+  # qwt/src/qwt_transform.cpp
+  # qwt/src/qwt_widget_overlay.cpp
+# )
+# include_directories(qwt/src)
 
 
-# Start processing the options
-option(LIBQWT_ENABLE_PLOT "Enable the basic plot widget" ON)
-if(LIBQWT_ENABLE_PLOT)
-	list(APPEND QWT_SOURCES
-	  qwt/src/qwt_curve_fitter.cpp
-    qwt/src/qwt_abstract_legend.cpp
-    qwt/src/qwt_legend.cpp
-    qwt/src/qwt_legend_data.cpp
-    qwt/src/qwt_legend_label.cpp
-    qwt/src/qwt_plot.cpp
-    qwt/src/qwt_plot_renderer.cpp
-    qwt/src/qwt_plot_xml.cpp
-    qwt/src/qwt_plot_axis.cpp
-    qwt/src/qwt_plot_curve.cpp
-    qwt/src/qwt_plot_dict.cpp
-    qwt/src/qwt_plot_directpainter.cpp
-    qwt/src/qwt_plot_grid.cpp
-    qwt/src/qwt_plot_histogram.cpp
-    qwt/src/qwt_plot_item.cpp
-    qwt/src/qwt_plot_abstract_barchart.cpp
-    qwt/src/qwt_plot_barchart.cpp
-    qwt/src/qwt_plot_multi_barchart.cpp
-    qwt/src/qwt_plot_intervalcurve.cpp
-    qwt/src/qwt_plot_zoneitem.cpp
-    qwt/src/qwt_plot_tradingcurve.cpp
-    qwt/src/qwt_plot_spectrogram.cpp
-    qwt/src/qwt_plot_spectrocurve.cpp
-    qwt/src/qwt_plot_scaleitem.cpp
-    qwt/src/qwt_plot_legenditem.cpp
-    qwt/src/qwt_plot_seriesitem.cpp
-    qwt/src/qwt_plot_shapeitem.cpp
-    qwt/src/qwt_plot_marker.cpp
-    qwt/src/qwt_plot_textlabel.cpp
-    qwt/src/qwt_plot_layout.cpp
-    qwt/src/qwt_plot_canvas.cpp
-    qwt/src/qwt_plot_panner.cpp
-    qwt/src/qwt_plot_rasteritem.cpp
-    qwt/src/qwt_plot_picker.cpp
-    qwt/src/qwt_plot_zoomer.cpp
-    qwt/src/qwt_plot_magnifier.cpp
-    qwt/src/qwt_plot_rescaler.cpp
-    qwt/src/qwt_point_mapper.cpp
-    qwt/src/qwt_raster_data.cpp
-    qwt/src/qwt_matrix_raster_data.cpp
-    qwt/src/qwt_sampling_thread.cpp
-    qwt/src/qwt_series_data.cpp
-    qwt/src/qwt_point_data.cpp
-    qwt/src/qwt_scale_widget.cpp
-	)
-else()
-	add_definitions(-DNO_QWT_PLOT) 
-endif()
+# # Start processing the options
+# option(LIBQWT_ENABLE_PLOT "Enable the basic plot widget" ON)
+# if(LIBQWT_ENABLE_PLOT)
+	# list(APPEND QWT_SOURCES
+	  # qwt/src/qwt_curve_fitter.cpp
+    # qwt/src/qwt_abstract_legend.cpp
+    # qwt/src/qwt_legend.cpp
+    # qwt/src/qwt_legend_data.cpp
+    # qwt/src/qwt_legend_label.cpp
+    # qwt/src/qwt_plot.cpp
+    # qwt/src/qwt_plot_renderer.cpp
+    # qwt/src/qwt_plot_xml.cpp
+    # qwt/src/qwt_plot_axis.cpp
+    # qwt/src/qwt_plot_curve.cpp
+    # qwt/src/qwt_plot_dict.cpp
+    # qwt/src/qwt_plot_directpainter.cpp
+    # qwt/src/qwt_plot_grid.cpp
+    # qwt/src/qwt_plot_histogram.cpp
+    # qwt/src/qwt_plot_item.cpp
+    # qwt/src/qwt_plot_abstract_barchart.cpp
+    # qwt/src/qwt_plot_barchart.cpp
+    # qwt/src/qwt_plot_multi_barchart.cpp
+    # qwt/src/qwt_plot_intervalcurve.cpp
+    # qwt/src/qwt_plot_zoneitem.cpp
+    # qwt/src/qwt_plot_tradingcurve.cpp
+    # qwt/src/qwt_plot_spectrogram.cpp
+    # qwt/src/qwt_plot_spectrocurve.cpp
+    # qwt/src/qwt_plot_scaleitem.cpp
+    # qwt/src/qwt_plot_legenditem.cpp
+    # qwt/src/qwt_plot_seriesitem.cpp
+    # qwt/src/qwt_plot_shapeitem.cpp
+    # qwt/src/qwt_plot_marker.cpp
+    # qwt/src/qwt_plot_textlabel.cpp
+    # qwt/src/qwt_plot_layout.cpp
+    # qwt/src/qwt_plot_canvas.cpp
+    # qwt/src/qwt_plot_panner.cpp
+    # qwt/src/qwt_plot_rasteritem.cpp
+    # qwt/src/qwt_plot_picker.cpp
+    # qwt/src/qwt_plot_zoomer.cpp
+    # qwt/src/qwt_plot_magnifier.cpp
+    # qwt/src/qwt_plot_rescaler.cpp
+    # qwt/src/qwt_point_mapper.cpp
+    # qwt/src/qwt_raster_data.cpp
+    # qwt/src/qwt_matrix_raster_data.cpp
+    # qwt/src/qwt_sampling_thread.cpp
+    # qwt/src/qwt_series_data.cpp
+    # qwt/src/qwt_point_data.cpp
+    # qwt/src/qwt_scale_widget.cpp
+	# )
+# else()
+	# add_definitions(-DNO_QWT_PLOT) 
+# endif()
 
-option(LIBQWT_ENABLE_WIDGETS "Enable widgets like the knob and the thermometer" ON)
-if(LIBQWT_ENABLE_WIDGETS)
-  find_package(Qt5Widgets REQUIRED)
-	list(APPEND QT_MODULES Widgets)
-  list(APPEND QWT_SOURCES 
-    qwt/src/qwt_abstract_slider.cpp
-    qwt/src/qwt_abstract_scale.cpp
-    qwt/src/qwt_arrow_button.cpp
-    qwt/src/qwt_analog_clock.cpp
-    qwt/src/qwt_compass.cpp
-    qwt/src/qwt_compass_rose.cpp
-    qwt/src/qwt_counter.cpp
-    qwt/src/qwt_dial.cpp
-    qwt/src/qwt_dial_needle.cpp
-    qwt/src/qwt_knob.cpp
-    qwt/src/qwt_slider.cpp
-    qwt/src/qwt_thermo.cpp
-    qwt/src/qwt_wheel.cpp
-  )
-else()
-	add_definitions(-DNO_QWT_WIDGETS)
-endif()
+# option(LIBQWT_ENABLE_WIDGETS "Enable widgets like the knob and the thermometer" ON)
+# if(LIBQWT_ENABLE_WIDGETS)
+  # find_package(Qt5Widgets REQUIRED)
+	# list(APPEND QT_MODULES Widgets)
+  # list(APPEND QWT_SOURCES 
+    # qwt/src/qwt_abstract_slider.cpp
+    # qwt/src/qwt_abstract_scale.cpp
+    # qwt/src/qwt_arrow_button.cpp
+    # qwt/src/qwt_analog_clock.cpp
+    # qwt/src/qwt_compass.cpp
+    # qwt/src/qwt_compass_rose.cpp
+    # qwt/src/qwt_counter.cpp
+    # qwt/src/qwt_dial.cpp
+    # qwt/src/qwt_dial_needle.cpp
+    # qwt/src/qwt_knob.cpp
+    # qwt/src/qwt_slider.cpp
+    # qwt/src/qwt_thermo.cpp
+    # qwt/src/qwt_wheel.cpp
+  # )
+# else()
+	# add_definitions(-DNO_QWT_WIDGETS)
+# endif()
 
-option(LIBQWT_ENABLE_SVG "Enable SVG items" ON)
-if(LIBQWT_ENABLE_SVG)
-  find_package(Qt5Svg REQUIRED) # QUIET)
-	list(APPEND QT_MODULES Svg)
-  list(APPEND QWT_SOURCES 
-    qwt/src/qwt_plot_svgitem.cpp
-  )
-else()
-	add_definitions(-DQWT_NO_SVG)
-endif()
+# option(LIBQWT_ENABLE_SVG "Enable SVG items" ON)
+# if(LIBQWT_ENABLE_SVG)
+  # find_package(Qt5Svg REQUIRED) # QUIET)
+	# list(APPEND QT_MODULES Svg)
+  # list(APPEND QWT_SOURCES 
+    # qwt/src/qwt_plot_svgitem.cpp
+  # )
+# else()
+	# add_definitions(-DQWT_NO_SVG)
+# endif()
 
-option(LIBQWT_ENABLE_OPENGL "Enable OpenGL elements" ON)
-if(LIBQWT_ENABLE_OPENGL)
-  find_package(Qt5OpenGL REQUIRED)
-	list(APPEND QT_MODULES OpenGL)
-	list(APPEND QWT_SOURCES 
-    qwt/src/qwt_plot_glcanvas.cpp
-	)
-else()
-	add_definitions(-DQWT_NO_OPENGL)
-endif()
+# option(LIBQWT_ENABLE_OPENGL "Enable OpenGL elements" ON)
+# if(LIBQWT_ENABLE_OPENGL)
+  # find_package(Qt5OpenGL REQUIRED)
+	# list(APPEND QT_MODULES OpenGL)
+	# list(APPEND QWT_SOURCES 
+    # qwt/src/qwt_plot_glcanvas.cpp
+	# )
+# else()
+	# add_definitions(-DQWT_NO_OPENGL)
+# endif()
 
-option(LIBQWT_ENABLE_MATHML "Enable Text engine based on mathml" ON)
-if(LIBQWT_ENABLE_MATHML)
-  find_package(Qt5Xml REQUIRED)
-	list(APPEND QT_MODULES Xml)
-	list(APPEND QWT_SOURCES 
-    qwt/textengines/mathml/qwt_mathml_text_engine.cpp
-	)
-  include_directories(qwt/textengines/mathml)
-else()
-	add_definitions(-DQWT_NO_MATHML)
-endif()
+# option(LIBQWT_ENABLE_MATHML "Enable Text engine based on mathml" ON)
+# if(LIBQWT_ENABLE_MATHML)
+  # find_package(Qt5Xml REQUIRED)
+	# list(APPEND QT_MODULES Xml)
+	# list(APPEND QWT_SOURCES 
+    # qwt/textengines/mathml/qwt_mathml_text_engine.cpp
+	# )
+  # include_directories(qwt/textengines/mathml)
+# else()
+	# add_definitions(-DQWT_NO_MATHML)
+# endif()
+
+file(GLOB QWT_MAIN_SRC ${CMAKE_CURRENT_SOURCE_DIR}/qwt/src/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/qwt/textengines/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/qwt/textengines/mathml/*.cpp)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/qwt/src ${CMAKE_CURRENT_SOURCE_DIR}/qwt/textengines ${CMAKE_CURRENT_SOURCE_DIR}/qwt/textengines/mathml)
+
+list(REMOVE_ITEM QWT_MAIN_SRC "${CMAKE_CURRENT_SOURCE_DIR}/qwt/src/qwt_plot_svgitem.cpp")
+add_definitions(-DQWT_NO_SVG)
+
+#list(REMOVE_ITEM QWT_MAIN_SRC "${CMAKE_CURRENT_SOURCE_DIR}/qwt/src/qwt_plot_glcanvas.cpp")
+#add_definitions(-DQWT_NO_OPENGL)
+
+find_package(Qt5 COMPONENTS Widgets Xml OpenGL REQUIRED)
+list(APPEND QT_MODULES Widgets Xml OpenGL)
+
+
+set(QWT_SOURCES ${QWT_MAIN_SRC})
+
+#cmake_policy(SET CMP0057 NEW)
+#foreach(src_file ${QWT_MAIN_SRC})
+#  if ("${src_file}" IN_LIST "${QWT_SOURCES}")
+#    # Success
+#  else()
+#    message(STATUS "Missing from sources list: ${src_file}")
+#  endif()
+#endforeach()
 
 
 # Create the target and manage linking and includes
