@@ -40,7 +40,7 @@ if(WIN32)
   endforeach()
 endif()
 
-qt5_use_modules(qwt Core Widgets Concurrent OpenGL Svg PrintSupport)
+qt5_use_modules(qwt Core Widgets Concurrent OpenGL PrintSupport)
 target_link_libraries(qwt ${QT_LIBRARIES})
 
 install(TARGETS qwt
