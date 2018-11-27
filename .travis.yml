@@ -1,15 +1,8 @@
 language: cpp
 
 env:
-  matrix:
-    - CONFIG=Debug
-      QWT_BUILD_SHARED_LIBS=ON
-    - CONFIG=Release
-      QWT_BUILD_SHARED_LIBS=ON
-    - CONFIG=Debug
-      QWT_BUILD_SHARED_LIBS=OFF
-    - CONFIG=Release
-      QWT_BUILD_SHARED_LIBS=OFF
+  - CONFIG=Release
+  - QWT_BUILD_SHARED_LIBS=OFF
 
 matrix:
   include:
