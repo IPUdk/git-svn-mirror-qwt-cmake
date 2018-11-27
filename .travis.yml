@@ -1,10 +1,15 @@
 language: cpp
 
 env:
-  - QWT_BUILD_SHARED_LIBS=ON
-  - QWT_BUILD_SHARED_LIBS=OFF
-  - CONFIG=Debug
-  - CONFIG=Release
+  matrix:
+    - CONFIG=Debug
+      QWT_BUILD_SHARED_LIBS=ON
+    - CONFIG=Release
+      QWT_BUILD_SHARED_LIBS=ON
+    - CONFIG=Debug
+      QWT_BUILD_SHARED_LIBS=OFF
+    - CONFIG=Release
+      QWT_BUILD_SHARED_LIBS=OFF
 
 matrix:
   include:
@@ -16,11 +21,6 @@ matrix:
       compiler: gcc
 
 install:
-  - brew unlink cmake
-  - brew install cmake
-  - brew install qt5
-  - brew link --force qt5
-  - chmod -R 755 /usr/local/opt/qt5/*
   - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then
          sudo apt-add-repository -y ppa:beineri/opt-qt597-trusty
       && sudo apt-add-repository -y ppa:george-edison55/cmake-3.x
@@ -29,7 +29,8 @@ install:
       && QTDIR="/opt/qt59"
       ;
     else
-         brew unlink cmake
+         brew update
+      && brew unlink cmake
       && brew install cmake
       && brew install qt5
       && brew link --force qt5
