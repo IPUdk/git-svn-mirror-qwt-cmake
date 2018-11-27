@@ -12,13 +12,13 @@ set(CMAKE_AUTOMOC ON) # For meta object compiler
 set(CMAKE_AUTORCC ON) # Resource files
 set(CMAKE_AUTOUIC ON) # UI files
 
-file(GLOB QWT_MAIN_SRC src/*.cpp)
-file(GLOB QWT_MAIN_HDR src/*.h)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
+file(GLOB QWT_MAIN_SRC qwt/src/*.cpp)
+file(GLOB QWT_MAIN_HDR qwt/src/*.h)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/qwt/src)
 
-file(GLOB QWT_NGNS_SRC textengines/*.cpp)
-file(GLOB QWT_NGNS_HDR textengines/*.h)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/textengines)
+file(GLOB QWT_NGNS_SRC qwt/textengines/*.cpp)
+file(GLOB QWT_NGNS_HDR qwt/textengines/*.h)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/qwt/textengines)
 
 if(QWT_BUILD_SHARED_LIBS)
   add_library(qwt SHARED ${QWT_MAIN_SRC} ${QWT_NGNS_SRC})
