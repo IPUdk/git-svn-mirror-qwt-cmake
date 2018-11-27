@@ -1,0 +1,52 @@
+language: cpp
+
+matrix:
+  include:
+    - os: osx
+      compiler: clang
+      env:
+        - CONFIG=Release
+        - QWT_BUILD_SHARED_LIBS=OFF
+    - os: osx
+      compiler: clang
+      env:
+        - CONFIG=Release
+        - QWT_BUILD_SHARED_LIBS=ON
+    - os: linux
+      sudo: required
+      dist: trusty
+      compiler: gcc
+      env:
+        - CONFIG=Release
+        - QWT_BUILD_SHARED_LIBS=OFF
+    - os: linux
+      sudo: required
+      dist: trusty
+      compiler: gcc
+      env:
+        - CONFIG=Release
+        - QWT_BUILD_SHARED_LIBS=ON
+
+install:
+  - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then
+         sudo apt-add-repository -y ppa:beineri/opt-qt596-trusty
+      && sudo apt-add-repository -y ppa:george-edison55/cmake-3.x
+      && sudo apt-get -qq update
+      && sudo apt-get -qq install build-essential qt59tools qt59base cmake
+      && QTDIR="/opt/qt59"
+      ;
+    else
+         brew update
+      && brew unlink cmake
+      && brew install cmake
+      && brew install qt5
+      && brew link --force qt5
+      && chmod -R 755 /usr/local/opt/qt5/*
+      && QTDIR="/usr/local/opt/qt5"
+      ;
+    fi
+
+script:
+  - mkdir build && pushd build
+  - cmake .. -DCMAKE_BUILD_TYPE=$CONFIG -DCMAKE_PREFIX_PATH=$QTDIR -DQWT_BUILD_SHARED_LIBS=$QWT_BUILD_SHARED_LIBS
+  - cmake --build . --config $CONFIG
