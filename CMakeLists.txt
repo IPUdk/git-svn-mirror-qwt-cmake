@@ -10,10 +10,10 @@ project(Qwt VERSION 6.1.3)
 
 find_package(Qt5 COMPONENTS Core Concurrent PrintSupport REQUIRED)
 #qt5_use_modules(qwt Core Widgets Concurrent OpenGL PrintSupport)
-list(APPEND QT_LIBS 
-  Qt5::Core
-  Qt5::PrintSupport
-  Qt5::Concurrent
+list(APPEND QT_MODULES
+  Core
+  PrintSupport
+  Concurrent
 )
 
 set(CMAKE_AUTOMOC ON) # For meta object compiler
@@ -118,7 +118,7 @@ endif()
 option(LIBQWT_ENABLE_WIDGETS "Enable widgets like the knob and the thermometer" ON)
 if(LIBQWT_ENABLE_WIDGETS)
   find_package(Qt5Widgets REQUIRED)
-	list(APPEND QT_LIBS Qt5::Widgets)
+	list(APPEND QT_MODULES Widgets)
   list(APPEND QWT_SOURCES 
     qwt/src/qwt_abstract_slider.cpp
     qwt/src/qwt_abstract_scale.cpp
@@ -141,7 +141,7 @@ endif()
 option(LIBQWT_ENABLE_SVG "Enable SVG items" ON)
 if(LIBQWT_ENABLE_SVG)
   find_package(Qt5Svg REQUIRED) # QUIET)
-	list(APPEND QT_LIBS Qt5::Svg)
+	list(APPEND QT_MODULES Svg)
   list(APPEND QWT_SOURCES 
     qwt/src/qwt_plot_svgitem.cpp
   )
@@ -152,7 +152,7 @@ endif()
 option(LIBQWT_ENABLE_OPENGL "Enable OpenGL elements" ON)
 if(LIBQWT_ENABLE_OPENGL)
   find_package(Qt5OpenGL REQUIRED)
-	list(APPEND QT_LIBS Qt5::OpenGL)
+	list(APPEND QT_MODULES OpenGL)
 	list(APPEND QWT_SOURCES 
     qwt/src/qwt_plot_glcanvas.cpp
 	)
@@ -163,28 +163,33 @@ endif()
 option(LIBQWT_ENABLE_MATHML "Enable Text engine based on mathml" ON)
 if(LIBQWT_ENABLE_MATHML)
   find_package(Qt5Xml REQUIRED)
-	list(APPEND QT_LIBS Qt5::Xml)
+	list(APPEND QT_MODULES Xml)
 	list(APPEND QWT_SOURCES 
-    qwt/src/textengines/mathml/qwt_mathml_text_engine.cpp)
+    qwt/textengines/mathml/qwt_mathml_text_engine.cpp
 	)
-  include_directories(qwt/src/textengines/mathml)
+  include_directories(qwt/textengines/mathml)
 else()
 	add_definitions(-DQWT_NO_MATHML)
 endif()
 
 
 # Create the target and manage linking and includes
+option(QWT_BUILD_SHARED_LIBS "Build a DLL and use dynamic Qt libraries" ON)
 if(QWT_BUILD_SHARED_LIBS)
   add_library(qwt SHARED ${QWT_SOURCES})
   if(WIN32)
-	  target_compile_definitions(qwt -DQT_DLL -DQWT_DLL -DQWT_MAKEDLL)
+	  target_compile_definitions(qwt PRIVATE QT_DLL QWT_DLL QWT_MAKEDLL)
   endif()
 else()
   add_library(qwt STATIC ${QWT_SOURCES})
 endif()
-include_directories(qwt PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/qwt/src>")
-target_link_libraries(qwt ${QT_LIBS})
+
+qt5_use_modules(qwt ${QT_MODULES})
+target_link_libraries(qwt ${QT_LIBRARIES})
+
+#include_directories(qwt PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/qwt/src>")
 set_property(TARGET qwt PROPERTY SOVERSION ${PROJECT_VERSION})
+
 
 # Add the installation settings
 include(GNUInstallDirs)

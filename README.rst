@@ -33,6 +33,14 @@ Note that you can configure static and dynamic builds via the CMake option
 :code:`QWT_BUILD_SHARED_LIBS=ON`, but remember to deploy the shared 
 library with your project if it not available on the target machine.
 
+.. code-block:: shell
+
+   mkdir build
+   cmake .. -G "Visual Studio 15 2017 Win64" -DCMAKE_PREFIX_PATH=C:\Qt\5.9.1\msvc2017_64
+   cmake .. -G "Visual Studio 12 2013 Win64" -DCMAKE_PREFIX_PATH=C:\Qt\5.6\msvc2013_64
+   cmake --build .
+
+
 **********
 References
 **********
