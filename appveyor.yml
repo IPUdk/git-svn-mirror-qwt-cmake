@@ -12,15 +12,19 @@ image:
   - Visual Studio 2013
 
 configuration:
-#  - Debug
+  - Debug
   - Release
 
 environment:
   matrix:
   - arch: Win32
+    QWT_BUILD_SHARED_LIBS: ON
   - arch: Win64
-  - QWT_BUILD_SHARED_LIBS: ON
-  - QWT_BUILD_SHARED_LIBS: OFF
+    QWT_BUILD_SHARED_LIBS: ON
+  - arch: Win32
+    QWT_BUILD_SHARED_LIBS: OFF
+  - arch: Win64
+    QWT_BUILD_SHARED_LIBS: OFF
 
 matrix:
   exclude:
