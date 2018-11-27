@@ -47,4 +47,4 @@ before_build:
 
 build_script:
   - cd c:\projects\Qwt\build
-  - cmake --build . -DCMAKE_BUILD_TYPE=%configuration%
+  - cmake --build . --config %configuration%
