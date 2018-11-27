@@ -1,21 +1,23 @@
 language: cpp
 
-env:
-  - CONFIG=Release
-  - QWT_BUILD_SHARED_LIBS=OFF
-
 matrix:
   include:
     - os: osx
       compiler: clang
+      env:
+        - CONFIG=Release
+        - QWT_BUILD_SHARED_LIBS=OFF
     - os: linux
       sudo: required
       dist: trusty
       compiler: gcc
+      env:
+        - CONFIG=Release
+        - QWT_BUILD_SHARED_LIBS=OFF
 
 install:
   - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then
-         sudo apt-add-repository -y ppa:beineri/opt-qt597-trusty
+         sudo apt-add-repository -y ppa:beineri/opt-qt596-trusty
       && sudo apt-add-repository -y ppa:george-edison55/cmake-3.x
       && sudo apt-get -qq update
       && sudo apt-get -qq install build-essential qt59tools qt59base cmake
