@@ -7,6 +7,11 @@ matrix:
       env:
         - CONFIG=Release
         - QWT_BUILD_SHARED_LIBS=OFF
+    - os: osx
+      compiler: clang
+      env:
+        - CONFIG=Release
+        - QWT_BUILD_SHARED_LIBS=ON
     - os: linux
       sudo: required
       dist: trusty
@@ -14,6 +19,13 @@ matrix:
       env:
         - CONFIG=Release
         - QWT_BUILD_SHARED_LIBS=OFF
+    - os: linux
+      sudo: required
+      dist: trusty
+      compiler: gcc
+      env:
+        - CONFIG=Release
+        - QWT_BUILD_SHARED_LIBS=ON
 
 install:
   - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then

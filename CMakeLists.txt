@@ -6,7 +6,7 @@ project(Qwt)
 #	add_definitions(-DQT_DLL -DQWT_DLL -DQWT_MAKEDLL)
 #endif()
 
-find_package(Qt5 COMPONENTS Core Widgets Concurrent OpenGL Svg PrintSupport REQUIRED)
+find_package(Qt5 COMPONENTS Core Widgets Concurrent OpenGL PrintSupport REQUIRED)
 
 set(CMAKE_AUTOMOC ON) # For meta object compiler
 set(CMAKE_AUTORCC ON) # Resource files

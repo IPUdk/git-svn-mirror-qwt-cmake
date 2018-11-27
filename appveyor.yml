@@ -12,7 +12,7 @@ image:
   - Visual Studio 2013
 
 configuration:
-  - Debug
+  #- Debug
   - Release
 
 environment:
