@@ -26,15 +26,16 @@ if(FALSE)
   list(REMOVE_ITEM QWT_MAIN_SRC "${CMAKE_CURRENT_SOURCE_DIR}/qwt/src/qwt_plot_opengl_canvas.cpp")
   add_definitions(-DQWT_NO_OPENGL)
 else()
-  if(MSVC)
-    list(APPEND LINK_LIBS opengl32 glu32)
-  endif(MSVC)
+  find_package(OpenGL REQUIRED)
+  list(APPEND LINK_LIBS ${OPENGL_LIBRARIES})
+  #target_include_directories(<your-target> PRIVATE ${OPENGL_INCLUDE_DIR})
+  #target_link_libraries(<your-target> PRIVATE ${OPENGL_LIBRARIES})
+  find_package(Qt5 COMPONENTS OpenGL REQUIRED)
+  list(APPEND QT_MODULES OpenGL)
 endif()
 
-
-
-find_package(Qt5 COMPONENTS Widgets Xml OpenGL REQUIRED)
-list(APPEND QT_MODULES Widgets Xml OpenGL)
+find_package(Qt5 COMPONENTS Widgets Xml REQUIRED)
+list(APPEND QT_MODULES Widgets Xml)
 
 
 set(QWT_SOURCES ${QWT_MAIN_SRC})
