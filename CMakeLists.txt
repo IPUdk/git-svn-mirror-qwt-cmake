@@ -16,7 +16,7 @@ set(CMAKE_AUTOUIC ON) # UI files
 #set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 file(GLOB QWT_MAIN_SRC ${CMAKE_CURRENT_SOURCE_DIR}/qwt/src/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/qwt/textengines/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/qwt/textengines/mathml/*.cpp)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/qwt/src ${CMAKE_CURRENT_SOURCE_DIR}/qwt/textengines ${CMAKE_CURRENT_SOURCE_DIR}/qwt/textengines/mathml)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/qwt/classincludes ${CMAKE_CURRENT_SOURCE_DIR}/qwt/src ${CMAKE_CURRENT_SOURCE_DIR}/qwt/textengines ${CMAKE_CURRENT_SOURCE_DIR}/qwt/textengines/mathml)
 
 list(REMOVE_ITEM QWT_MAIN_SRC "${CMAKE_CURRENT_SOURCE_DIR}/qwt/src/qwt_plot_svgitem.cpp")
 add_definitions(-DQWT_NO_SVG)
@@ -62,6 +62,10 @@ else()
   if(WIN32)
     target_compile_definitions(qwt PUBLIC QT_DLL)
   endif()
+endif()
+
+if(WIN32)
+  set_target_properties(qwt PROPERTIES DEBUG_POSTFIX "d")
 endif()
 
 qt5_use_modules(qwt ${QT_MODULES})
