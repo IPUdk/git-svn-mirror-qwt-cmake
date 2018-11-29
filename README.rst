@@ -40,6 +40,17 @@ library with your project if it not available on the target machine.
    cmake .. -G "Visual Studio 12 2013 Win64" -DCMAKE_PREFIX_PATH=C:\Qt\5.6\msvc2013_64
    cmake --build .
 
+If you only would like to include Qwt in your application, than there is a
+macro that should help you to handle the include paths and the deployment
+of the shared library:
+
+.. code-block:: cmake
+
+   add_executable(your_executable ${YOUR_SOURCES})
+   
+   add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/externals/qwt)
+   add_qwt_to_target(your_executable)
+
 
 **********
 References

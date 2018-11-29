@@ -75,3 +75,18 @@ target_link_libraries(qwt ${QT_LIBRARIES} ${LINK_LIBS})
 set_property(TARGET qwt PROPERTY SOVERSION ${PROJECT_VERSION})
 
 export(TARGETS qwt FILE ${CMAKE_CURRENT_BINARY_DIR}/qwt-exports.cmake)
+
+# Provide a macro that handles the library deployment and the include paths
+macro(add_qwt_to_target param_TARGETNAME)
+  add_dependencies(${param_TARGETNAME} qwt)
+  target_link_libraries(${param_TARGETNAME} $<TARGET_LINKER_FILE:qwt>)
+  target_include_directories(${param_TARGETNAME} PUBLIC $<TARGET_PROPERTY:qwt,INCLUDE_DIRECTORIES>)
+  if(QWT_BUILD_SHARED_LIBS)
+    add_custom_command(
+      TARGET ${param_TARGETNAME}
+      POST_BUILD
+      COMMAND ${CMAKE_COMMAND} -E copy "$<TARGET_FILE:qwt>" "$<TARGET_FILE_DIR:${param_TARGETNAME}>"
+      COMMENT "Deploying the qwt library"
+    )
+  endif(QWT_BUILD_SHARED_LIBS)
+endmacro()
