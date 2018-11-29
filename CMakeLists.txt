@@ -74,3 +74,4 @@ target_link_libraries(qwt ${QT_LIBRARIES} ${LINK_LIBS})
 #include_directories(qwt PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/qwt/src>")
 set_property(TARGET qwt PROPERTY SOVERSION ${PROJECT_VERSION})
 
+export(TARGETS qwt FILE ${CMAKE_CURRENT_BINARY_DIR}/qwt-exports.cmake)
