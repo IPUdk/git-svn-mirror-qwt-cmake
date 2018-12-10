@@ -21,7 +21,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/qwt/classincludes ${CMAKE_CURREN
 list(REMOVE_ITEM QWT_MAIN_SRC "${CMAKE_CURRENT_SOURCE_DIR}/qwt/src/qwt_plot_svgitem.cpp")
 add_definitions(-DQWT_NO_SVG)
 
-if(FALSE)
+if(TRUE) # Disable OpenGL, Qwt uses legacy code that is not supported by MSVC 2017
   list(REMOVE_ITEM QWT_MAIN_SRC "${CMAKE_CURRENT_SOURCE_DIR}/qwt/src/qwt_plot_glcanvas.cpp")
   list(REMOVE_ITEM QWT_MAIN_SRC "${CMAKE_CURRENT_SOURCE_DIR}/qwt/src/qwt_plot_opengl_canvas.cpp")
   add_definitions(-DQWT_NO_OPENGL)
@@ -88,5 +88,6 @@ macro(add_qwt_to_target param_TARGETNAME)
       COMMAND ${CMAKE_COMMAND} -E copy "$<TARGET_FILE:qwt>" "$<TARGET_FILE_DIR:${param_TARGETNAME}>"
       COMMENT "Deploying the qwt library"
     )
+    target_link_libraries(${param_TARGETNAME} ${LINK_LIBS})
   endif(QWT_BUILD_SHARED_LIBS)
 endmacro()
